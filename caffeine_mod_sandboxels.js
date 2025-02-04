@@ -1,8 +1,9 @@
-if (!elements) var elements = {}; // Ensures 'elements' exists
+if (typeof elements === "undefined") var elements = {}; // Ensure elements object exists
 
+// Define pure caffeine powder
 elements.pure_caffeine = {
     color: "#c69c6d",
-    behavior: behaviors.POWDER, // Corrected behavior
+    behavior: behaviors.POWDER, // Falls like a powder
     category: "powders",
     state: "solid",
     density: 1230,
@@ -14,10 +15,11 @@ elements.pure_caffeine = {
     }
 };
 
+// Define pure caffeine liquid
 elements.pure_caffeine_liquid = {
     color: "#8b5a2b",
-    behavior: behaviors.LIQUID, // Corrected liquid behavior
-    viscosity: 50, // Ensures thickness
+    behavior: behaviors.LIQUID, // Behaves like a liquid
+    viscosity: 50,
     category: "liquids",
     state: "liquid",
     density: 1100,
@@ -29,7 +31,7 @@ elements.pure_caffeine_liquid = {
         "water": { elem1: "pure_caffeine_solution" },
         "human": {
             func: function(pixel) {
-                if (pixel && pixel.energy !== undefined) {
+                if (pixel && typeof pixel.energy !== "undefined") {
                     pixel.energy = Math.min(pixel.energy + 10, 100);
                 }
             }
@@ -37,6 +39,7 @@ elements.pure_caffeine_liquid = {
     }
 };
 
+// Define pure caffeine gas
 elements.pure_caffeine_gas = {
     color: "#f5e1c4",
     behavior: [
@@ -52,7 +55,7 @@ elements.pure_caffeine_gas = {
     reactions: {
         "human": {
             func: function(pixel) {
-                if (pixel && pixel.energy !== undefined) {
+                if (pixel && typeof pixel.energy !== "undefined") {
                     pixel.energy = Math.min(pixel.energy + 2, 100);
                 }
             }
@@ -60,9 +63,10 @@ elements.pure_caffeine_gas = {
     }
 };
 
+// Define pure caffeine solution
 elements.pure_caffeine_solution = {
     color: "#b08968",
-    behavior: behaviors.LIQUID, // Flows like a liquid
+    behavior: behaviors.LIQUID, // Behaves like a liquid
     viscosity: 15,
     category: "liquids",
     state: "liquid",
@@ -70,7 +74,7 @@ elements.pure_caffeine_solution = {
     reactions: {
         "human": {
             func: function(pixel) {
-                if (pixel && pixel.energy !== undefined) {
+                if (pixel && typeof pixel.energy !== "undefined") {
                     pixel.energy = Math.min(pixel.energy + 15, 100);
                 }
             }
