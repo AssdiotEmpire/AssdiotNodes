@@ -1,55 +1,79 @@
+if (!elements) var elements = {}; // Ensures 'elements' exists
+
 elements.pure_caffeine = {
-    color: "#c69c6d", // Light brown powder
-    behavior: behaviors.POWDER, // Falls like a powder
+    color: "#c69c6d",
+    behavior: behaviors.POWDER, // Corrected behavior
     category: "powders",
     state: "solid",
-    density: 1230, // Pure caffeine powder density
-    tempHigh: 178, // Melts at 178°C
-    stateHigh: "pure_caffeine_liquid", // Becomes liquid caffeine
+    density: 1230,
+    tempHigh: 178,
+    stateHigh: "pure_caffeine_liquid",
     reactions: {
-        "water": { elem1: "pure_caffeine_solution" }, // Dissolves in water
-        "fire": { elem1: "pure_caffeine_gas" } // Turns into gas when burned
+        "water": { elem1: "pure_caffeine_solution" },
+        "fire": { elem1: "pure_caffeine_gas" }
     }
 };
 
 elements.pure_caffeine_liquid = {
-    color: "#8b5a2b", // Dark brown liquid
-    behavior: behaviors.LIQUID, // Behaves as a liquid
-    viscosity: 50, // Moderately viscous
+    color: "#8b5a2b",
+    behavior: behaviors.LIQUID, // Corrected liquid behavior
+    viscosity: 50, // Ensures thickness
     category: "liquids",
     state: "liquid",
-    density: 1100, // Slightly denser than water
-    tempHigh: 238, // Boils at 238°C
+    density: 1100,
+    tempHigh: 238,
     stateHigh: "pure_caffeine_gas",
-    tempLow: 160, // Freezes back to solid
+    tempLow: 160,
     stateLow: "pure_caffeine",
     reactions: {
         "water": { elem1: "pure_caffeine_solution" },
-        "human": { func: function(pixel) { if (pixel) pixel.energy = Math.min(pixel.energy + 10, 100); } }
+        "human": {
+            func: function(pixel) {
+                if (pixel && pixel.energy !== undefined) {
+                    pixel.energy = Math.min(pixel.energy + 10, 100);
+                }
+            }
+        }
     }
 };
 
 elements.pure_caffeine_gas = {
-    color: "#f5e1c4", // Light caffeine gas color
-    behavior: behaviors.GAS, // Floats like a gas
+    color: "#f5e1c4",
+    behavior: [
+        "M1", "M1", "M1",
+        "M1", "XX", "M1",
+        "M1", "M1", "M1"
+    ], // Expands like a gas
     category: "gases",
     state: "gas",
-    density: 0.8, // Low density
-    tempLow: 230, // Condenses to liquid
+    density: 0.8,
+    tempLow: 230,
     stateLow: "pure_caffeine_liquid",
     reactions: {
-        "human": { func: function(pixel) { if (pixel) pixel.energy = Math.min(pixel.energy + 2, 100); } }
+        "human": {
+            func: function(pixel) {
+                if (pixel && pixel.energy !== undefined) {
+                    pixel.energy = Math.min(pixel.energy + 2, 100);
+                }
+            }
+        }
     }
 };
 
 elements.pure_caffeine_solution = {
-    color: "#b08968", // Light brown coffee color
-    behavior: behaviors.LIQUID,
+    color: "#b08968",
+    behavior: behaviors.LIQUID, // Flows like a liquid
     viscosity: 15,
     category: "liquids",
     state: "liquid",
-    density: 1005, // Slightly denser than water
+    density: 1005,
     reactions: {
-        "human": { func: function(pixel) { if (pixel) pixel.energy = Math.min(pixel.energy + 15, 100); } }
+        "human": {
+            func: function(pixel) {
+                if (pixel && pixel.energy !== undefined) {
+                    pixel.energy = Math.min(pixel.energy + 15, 100);
+                }
+            }
+        }
     }
 };
