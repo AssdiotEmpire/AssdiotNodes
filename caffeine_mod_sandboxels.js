@@ -1,5 +1,3 @@
-if (typeof elements === "undefined") var elements = {}; // Ensure elements object exists
-
 // Define pure caffeine powder
 elements.pure_caffeine = {
     color: "#c69c6d",
